@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: banking-app  # Deployment name; can be any valid name
+
+spec:
+  replicas: 2  # Number of application Pods to run
+
+  selector:
+    matchLabels:
+      app: banking-app  # Must match the Pod template label below
+
+  template:
+    metadata:
+      labels:
+        app: banking-app  # Must match Deployment selector and Service selector
+
+    spec:
+      containers:
+        - name: banking-app  # Container name; can be different from Deployment name
+          image: siddeadskull11/simple-banking-application:v1  # Docker Hub image to run
+          ports:
+            - containerPort: 5000  # Port on which the Flask application listens

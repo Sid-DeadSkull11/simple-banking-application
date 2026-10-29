@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: banking-app-service  # Service name; can differ from Deployment name
+
+spec:
+  type: NodePort
+
+  selector:
+    app: banking-app  # Must match the Pod template label in deployment.yaml
+
+  ports:
+    - port: 5000  # Port exposed by the Service inside the cluster
+      targetPort: 5000  # Port inside the application container
+      nodePort: 30080  # Port exposed on the Kubernetes node
